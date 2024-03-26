@@ -4,12 +4,13 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ChangeEvent } from "react";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogin = (event) => {
+  const handleLogin = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const userEmail = event.target.email.value;

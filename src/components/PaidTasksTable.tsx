@@ -7,10 +7,14 @@ interface Task {
   status: boolean;
 }
 
-function PaidTasksTable({ tasks }) {
-  function formatDate(dateString) {
+interface PaidTaskTableProps {
+  tasks: Task[] | null;
+}
+
+const PaidTasksTable: React.FC<PaidTaskTableProps> = ({ tasks }) => {
+  function formatDate(dateString: string) {
     const date = new Date(dateString);
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       month: "long",
       day: "numeric",
       year: "numeric",
@@ -67,6 +71,6 @@ function PaidTasksTable({ tasks }) {
       </div>
     </>
   );
-}
+};
 
 export default PaidTasksTable;

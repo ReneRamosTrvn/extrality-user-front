@@ -6,11 +6,14 @@ interface Task {
   dateFinished: string;
   status: boolean;
 }
+interface AllTaskTableProps {
+  tasks: Task[] | null;
+}
 
-function AllTasksTable({ tasks }) {
-  function formatDate(dateString) {
+const AllTasksTable: React.FC<AllTaskTableProps> = ({ tasks }) => {
+  function formatDate(dateString: string) {
     const date = new Date(dateString);
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       month: "long",
       day: "numeric",
       year: "numeric",
@@ -61,6 +64,6 @@ function AllTasksTable({ tasks }) {
       </div>
     </>
   );
-}
+};
 
 export default AllTasksTable;

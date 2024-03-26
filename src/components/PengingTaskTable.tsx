@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
+import { ChangeEvent } from "react";
 interface Task {
   _id: string;
   name: string;
@@ -14,9 +15,9 @@ interface Task {
 }
 
 interface PendingTaskTableProps {
-  tasks: Task[];
+  tasks: Task[] | null;
   onDelete: (taskId: string) => void;
-  onEdit: (taskId: string) => void;
+  onEdit: (taskId: string, updatedBody: object) => void;
 }
 
 const PendingTaskTable: React.FC<PendingTaskTableProps> = ({
@@ -24,7 +25,7 @@ const PendingTaskTable: React.FC<PendingTaskTableProps> = ({
   onDelete,
   onEdit,
 }) => {
-  const [editableTaskId, setEditableTaskId] = useState(null);
+  const [editableTaskId, setEditableTaskId] = useState<string | null>(null);
   const user = useSelector((state: RootState) => state.auth);
 
   const [formEditData, setFormEditData] = useState({
@@ -34,7 +35,7 @@ const PendingTaskTable: React.FC<PendingTaskTableProps> = ({
     input4: "",
   });
 
-  const handleEditInputChange = (event) => {
+  const handleEditInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormEditData({
       ...formEditData,
@@ -42,13 +43,13 @@ const PendingTaskTable: React.FC<PendingTaskTableProps> = ({
     });
   };
 
-  const edit = (taskId) => {
+  const edit = (taskId: string | null) => {
     setEditableTaskId(taskId);
   };
 
-  function formatDate(dateString) {
+  function formatDate(dateString: string) {
     const date = new Date(dateString);
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       month: "long",
       day: "numeric",
       year: "numeric",

@@ -2,9 +2,11 @@ import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { ChangeEvent } from "react";
 
 function AddTask() {
-  const user = useSelector((state) => state.auth);
+  const user = useSelector((state: RootState) => state.auth);
 
   const [formData, setFormData] = useState({
     input1: "",
@@ -13,7 +15,7 @@ function AddTask() {
     input4: "",
   });
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,

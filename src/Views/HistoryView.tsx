@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AllTasksTable from "../components/AllTasksTable";
+import { RootState } from "../state/store";
 
 interface Task {
   _id: string;
@@ -15,7 +16,7 @@ interface Task {
 
 function HistoyView() {
   const [tasks, setTasks] = useState<Task[] | null>(null);
-  const user = useSelector((state) => state.auth);
+  const user = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     fetchData();

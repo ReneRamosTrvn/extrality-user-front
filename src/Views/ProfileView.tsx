@@ -1,8 +1,9 @@
 import SideBar from "../components/SideBar";
 import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 
 function ProfileView() {
-  const user = useSelector((state) => state.auth);
+  const user = useSelector((state: RootState) => state.auth);
   return (
     <>
       <div className="w-full min-h-screen bg-zinc-200 grid grid-cols-12">

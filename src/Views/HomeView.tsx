@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "../components/NavBar";
+import { RootState } from "../state/store";
 
 interface Task {
   _id: string;
@@ -19,7 +20,7 @@ interface Task {
 }
 
 function HomePage() {
-  const userId = useSelector((state) => state.auth);
+  const userId = useSelector((state: RootState) => state.auth);
   const [tasks, setTasks] = useState<Task[] | null>(null);
 
   useEffect(() => {

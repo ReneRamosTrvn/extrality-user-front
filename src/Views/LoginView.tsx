@@ -5,13 +5,18 @@ import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ChangeEvent } from "react";
+import { useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    setLoading(true);
 
     const userEmail = event.target.email.value;
     const userPassword = event.target.password.value;
@@ -29,7 +34,7 @@ function Login() {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          setLoading(false);
           dispatch(
             setUser({
               name: response.data.name,
@@ -42,17 +47,21 @@ function Login() {
         .catch((error) => {
           if (error.response.data.message == "User not found") {
             toast("User not found");
+            setLoading(false);
           }
           if (error.response.status == "401") {
             toast("Wrong password");
+            setLoading(false);
           }
         });
     } else {
       if (!userEmail) {
         toast("Enter a valid email");
+        setLoading(false);
       }
       if (!userPassword) {
         toast("Enter a valid password");
+        setLoading(false);
       }
     }
   };
@@ -79,9 +88,14 @@ function Login() {
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+            className="flex justify-center items-center space-x-2 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
           >
-            Login
+            <p>Login</p>
+            {loading == true ? (
+              <AiOutlineLoading3Quarters className="animate-spin" />
+            ) : (
+              ""
+            )}
           </button>
           <Link to="register">
             <p className="text-white">
@@ -96,6 +110,11 @@ function Login() {
             </p>
             <p className="font-semibold">Email: employee@company.com</p>
             <p className="font-semibold">Password: eployee</p>
+            <p className="font-semibold underline">
+              Since the API its hosted on a free render service it will spin
+              down after inactivity, it might take up to 50 seconds to
+              reactivate.
+            </p>
           </div>
         </form>
         <ToastContainer />

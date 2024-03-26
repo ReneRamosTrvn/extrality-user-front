@@ -3,6 +3,7 @@ import { FaSave } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 interface Task {
   _id: string;
   name: string;
@@ -12,9 +13,19 @@ interface Task {
   status: boolean;
 }
 
-function PendingTaskTable({ tasks, onDelete, onEdit }) {
+interface PendingTaskTableProps {
+  tasks: Task[];
+  onDelete: (taskId: string) => void;
+  onEdit: (taskId: string) => void;
+}
+
+const PendingTaskTable: React.FC<PendingTaskTableProps> = ({
+  tasks,
+  onDelete,
+  onEdit,
+}) => {
   const [editableTaskId, setEditableTaskId] = useState(null);
-  const user = useSelector((state) => state.auth);
+  const user = useSelector((state: RootState) => state.auth);
 
   const [formEditData, setFormEditData] = useState({
     input1: "",
@@ -207,6 +218,6 @@ function PendingTaskTable({ tasks, onDelete, onEdit }) {
       </div>
     </>
   );
-}
+};
 
 export default PendingTaskTable;

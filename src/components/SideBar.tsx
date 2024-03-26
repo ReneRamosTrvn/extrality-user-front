@@ -7,11 +7,12 @@ import { logOut } from "../state/auth/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaCircleUser } from "react-icons/fa6";
+import { RootState } from "../state/store";
 
 function SideBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.name);
+  const user = useSelector((state: RootState) => state.auth.name);
 
   const handleLogout = () => {
     dispatch(logOut());

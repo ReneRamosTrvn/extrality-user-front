@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AllTasksTable from "../components/AllTasksTable";
 import { RootState } from "../state/store";
+import NavBar from "../components/NavBar";
 
 interface Task {
   _id: string;
@@ -35,11 +36,12 @@ function HistoyView() {
 
   return (
     <>
+      <NavBar />
       <div className="w-full min-h-screen bg-zinc-200 grid grid-cols-12">
         <div className="hidden lg:inline-block col-span-3">
           <SideBar />
         </div>
-        <div className="w-full p-10 col-span-12 lg:col-span-9 space-y-5">
+        <div className="w-full p-5 lg:p-10 col-span-12 lg:col-span-9 space-y-5">
           <h1 className="text-4xl font-semibold">History</h1>
           <h1 className="text-xl mt-3">
             Here you can see all your extra hour tasks worked

@@ -22,7 +22,7 @@ function SideBar() {
     <div className=" bg-gradient-to-b from-indigo-700 to-indigo-950 min-h-screen flex flex-col">
       <div className="flex items-center justify-center">
         <img
-          src="../../public/assets/Extrality.png"
+          src="/assets/Extrality.png"
           alt="avatar"
           className="h-40 w-40 rounded-full"
         />

@@ -75,7 +75,7 @@ function HomePage() {
     <>
       <NavBar />
       <div className="grid grid-cols-12 w-full">
-        <div className="hidden lg:inline-block col-span-3">
+        <div className="hidden bg-indigo-950  lg:inline-block col-span-3">
           <SideBar />
         </div>
         <div className="col-span-12 lg:col-span-9 w-full bg-zinc-100 min-h-screen p-5 lg:p-10 space-y-5">
